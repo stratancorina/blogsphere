@@ -4,12 +4,12 @@ const Home = () => {
   return (
     <section className="w-full flex-center flex-col">
       <h1 className="head_text text-center">
-      Welcome to
-        <br className="max-md:hidden" />
+      Hi and welcome to      
         <span className="orange_gradient text-center"> BlogSphere</span>
+        <br className="max-md:hidden" />
       </h1>
       <p className="desc text-center">
-      BlogSphere is your ultimate destination to explore insights, share stories, and engage with a community of passionate writers. From creative writing to in-depth articles, this is where ideas come to life.
+      Dive deep into my thoughts, stories and ideas.
       </p>
       <Feed />
     </section>

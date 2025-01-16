@@ -11,7 +11,7 @@ const CreatePost = () => {
   const { data: session } = useSession();
 
   const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ prompt: "", tag: "" });
+  const [post, setPost] = useState({ prompt: "", tag: "", title: "" });
 
   const createPost = async (e) => {
     e.preventDefault();
@@ -24,6 +24,7 @@ const CreatePost = () => {
           prompt: post.prompt,
           userId: session?.user.id,
           tag: post.tag,
+          title: post.title,
         }),
       });
 

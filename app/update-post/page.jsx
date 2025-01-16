@@ -10,7 +10,7 @@ const UpdatePost = () => {
   const searchParams = useSearchParams();
   const promptId = searchParams.get('id');
 
-  const [post, setPost] = useState({ prompt: '', tag: '' });
+  const [post, setPost] = useState({ prompt: '', tag: '', title: '' });
   const [submitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ const UpdatePost = () => {
       setPost({
         prompt: data.prompt,
         tag: data.tag,
+        title: data.title,
       });
     };
 
@@ -39,6 +40,7 @@ const UpdatePost = () => {
         body: JSON.stringify({
           prompt: post.prompt,
           tag: post.tag,
+          title: post.title,
         }),
       });
 
