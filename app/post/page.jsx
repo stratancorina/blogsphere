@@ -1,7 +1,7 @@
 // pages/post/[id].tsx
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, useState} from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
@@ -61,7 +61,6 @@ const PostDetails = () => {
   if (!post) return <div className="text-center mt-10">Loading...</div>;
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
       <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-10">
         <h1 className="text-3xl font-bold text-gray-800 mb-4">{post.title}</h1>
         <h1 className="text-lg text-gray-800 mb-4">{post.prompt}</h1>
@@ -99,7 +98,6 @@ const PostDetails = () => {
           </div>
         )}
       </div>
-    </Suspense>
   );
 };
 
