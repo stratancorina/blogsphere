@@ -10,7 +10,7 @@
     },
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": false,
+    "strict": true,
     "noEmit": true,
     "incremental": true,
     "module": "esnext",
@@ -23,8 +23,11 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "target": "es6",
+    "forceConsistentCasingInFileNames": true,
+
   },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "app/context/AuthContext.js"],
   "exclude": ["node_modules"]
 }

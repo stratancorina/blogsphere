@@ -5,8 +5,12 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
+import { useAuth } from 'app/context/AuthContext';
+
 const Nav = () => {
   const { data: session } = useSession();
+  const { role } = useAuth();
+
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -15,6 +19,7 @@ const Nav = () => {
     (async () => {
       const res = await getProviders();
       setProviders(res);
+      console.log(role)
     })();
   }, []);
 
@@ -31,13 +36,16 @@ const Nav = () => {
         <p className="logo_text">BlogSphere</p>
       </Link>
 
+
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
-            <Link href="/create-post" className="black_btn">
-              Create Post
-            </Link>
+            {role === 'admin' && (
+              <Link href="/create-post" className="black_btn">
+                Create Post
+              </Link>
+            )}
 
             <button type="button" onClick={signOut} className="outline_btn">
               Sign Out
@@ -94,13 +102,15 @@ const Nav = () => {
                 >
                   My Profile
                 </Link>
-                <Link
-                  href="/create-post"
-                  className="dropdown_link"
-                  onClick={() => setToggleDropdown(false)}
-                >
-                  Create Post
-                </Link>
+                {role === 'admin' && (
+                  <Link
+                    href="/create-post"
+                    className="dropdown_link"
+                    onClick={() => setToggleDropdown(false)}
+                  >
+                    Create Post
+                  </Link>
+                )}
                 <button
                   type="button"
                   onClick={() => {
