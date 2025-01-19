@@ -5,11 +5,11 @@ import NextAuth from 'next-auth';
 declare module 'next-auth' {
   interface Session {
     user: {
+      role?: string;
       name: string;
       email: string;
       image: string;
       id: string; // Add user ID
-      role: string; // Add role property
     };
   }
 }

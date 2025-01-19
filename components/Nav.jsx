@@ -19,7 +19,6 @@ const Nav = () => {
     (async () => {
       const res = await getProviders();
       setProviders(res);
-      console.log(role)
     })();
   }, []);
 
@@ -46,7 +45,6 @@ const Nav = () => {
                 Create Post
               </Link>
             )}
-
             <button type="button" onClick={signOut} className="outline_btn">
               Sign Out
             </button>

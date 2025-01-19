@@ -13,11 +13,13 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session }) {
-      // store the user id from MongoDB to session
-      const sessionUser = await User.findOne({ email: session.user.email });
-      session.user.id = sessionUser._id.toString();
-      // session.user.role = sessionUser.role;
-      session.user.role = sessionUser.role || 'user';
+      if (session.user) {
+        // store the user id from MongoDB to session
+        const sessionUser = await User.findOne({ email: session.user.email });
+        session.user.id = sessionUser._id.toString();
+        // session.user.role = sessionUser.role;
+        session.user.role = sessionUser.role || 'none';
+      }
       return session;
     },
     async signIn({ account, profile, user, credentials }) {

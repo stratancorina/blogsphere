@@ -5,11 +5,14 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
+import { useAuth } from 'app/context/AuthContext';
+
 const PostDetails = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { data: session } = useSession();
   const promptId = searchParams.get('id');
+  const { role } = useAuth();
 
   const [post, setPost] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);

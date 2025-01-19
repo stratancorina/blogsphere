@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 
 type AuthContextType = {
   role: string;
-  session: any;
+  session: any; // You can specify more precise types if needed
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
