@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import PostCard from './PostCard';
-import { useRouter } from "next/navigation";
 
 const PostCardList = ({ data, handleTagClick }) => {
   return (
@@ -24,8 +23,6 @@ const Feed = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
-
-  const router = useRouter();
 
   const fetchPosts = async (page = 1, tag = '') => {
     setLoading(true);
@@ -59,12 +56,6 @@ const Feed = () => {
     setCurrentPage(page);
   };
 
-  const handleTagClick = (tag) => {
-    const sanitizedTag = tag.replace(/#/g, ''); // Remove all '#' characters
-      setSearchText(sanitizedTag);
-      setCurrentPage(1); // Reset to page 1 when a new tag is clicked
-  };
-
   return (
     <section className="feed mb-10">
       <form className="relative w-full flex-center">
@@ -82,14 +73,12 @@ const Feed = () => {
         <p>Loading posts...</p>
       ) : (
         <>
-          <PostCardList data={posts} handleTagClick={handleTagClick} />
-          {totalPages > 1 &&(
+          <PostCardList data={posts} handleTagClick={(tag) => setSearchText(tag)} />
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={handlePageChange}
           />
-          )}
         </>
       )}
     </section>

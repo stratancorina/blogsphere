@@ -19,14 +19,6 @@ const nextConfig = {
     };
     return config;
   },
-  async rewrites() {
-    return [
-      {
-        source: '/prompt',
-        destination: '/api/prompt',
-      },
-    ];
-  },
 };
 
 export default nextConfig;
