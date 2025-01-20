@@ -89,6 +89,10 @@
   @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
 
+.dashboard_btn{
+  @apply pr-1 py-1;
+}
+
 .delete_btn {
   @apply rounded-full border border-red-500 bg-transparent py-1.5 px-5 text-red-500 transition-all hover:bg-red-400 hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }

@@ -48,11 +48,12 @@ const Nav = () => {
             </button>
 
             {role === 'admin' ? (
-              <Link href="/dashboard">
+              <Link href="/dashboard" className="blue_btn gap-2 dashboard_btn">
+                <span>Dashboard </span>
                 <Image
                   src={session?.user.image}
-                  width={37}
-                  height={37}
+                  width={30}
+                  height={30}
                   className="rounded-full"
                   alt="dashboard"
                 />

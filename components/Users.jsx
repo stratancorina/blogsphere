@@ -23,7 +23,7 @@ const Users = ({ users }) => {
       );
 
     return (
-      <div className="users-list lg:w-1/3 border p-4 rounded bg-gray-100 h-min min-h-screen">
+      <div className="users-list lg:w-1/3 border p-4 rounded glassmorphism h-min min-h-screen">
         <h2 className="text-xl font-bold mb-4">All Users</h2>
         <div className="flex gap-4 flex-col">
           {users.map((user) => (
