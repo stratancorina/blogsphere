@@ -20,12 +20,6 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
       isValid = false;
     }
 
-    // Validate tag (must start with #)
-    if (!/^#/.test(post.tag)) {
-      newErrors.tag = 'Tag must start with #.';
-      isValid = false;
-    }
-
     setErrors(newErrors);
     return isValid;
   };
@@ -77,7 +71,7 @@ const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Tag
-            <span> (#product, #webdevelopment, #idea)</span>
+            <span> (#nature, #motivation, #learning)</span>
           </span>
           <input
             value={post.tag}
