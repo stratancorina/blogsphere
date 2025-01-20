@@ -179,3 +179,27 @@
 .flex-between {
   @apply flex justify-between items-center;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination_button {
+  background-color: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 50%; 
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.pagination_button.active {
+
+  @apply border bg-gradient-to-r from-blue-600 to-cyan-600;
+  color: white;
+}

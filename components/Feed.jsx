@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import PostCard from './PostCard';
 
-
 const PostCardList = ({ data, handleTagClick }) => {
   return (
     <div className="mt-16 prompt_layout">
@@ -12,7 +11,7 @@ const PostCardList = ({ data, handleTagClick }) => {
           key={post._id}
           post={post}
           handleTagClick={handleTagClick}
-        ></PostCard>
+        />
       ))}
     </div>
   );
@@ -21,42 +20,86 @@ const PostCardList = ({ data, handleTagClick }) => {
 const Feed = () => {
   const [searchText, setSearchText] = useState('');
   const [posts, setPosts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
 
-  const handleSearchChange = (e) => {};
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch('/api/prompt');
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        setPosts(data);
-      } catch (error) {
-        console.error('Failed to fetch posts:', error);
+  const fetchPosts = async (page = 1, tag = '') => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `/api/prompt?page=${page}&limit=5&tag=${tag}`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
-    };
+      const { prompts, totalPages: total } = await response.json();
+      setPosts(prompts);
+      setTotalPages(total);
+    } catch (error) {
+      console.error('Failed to fetch posts:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchPosts();
-  }, []);
+  useEffect(() => {
+    fetchPosts(currentPage, searchText);
+  }, [currentPage, searchText]);
+
+  const handleSearchChange = (e) => {
+    setSearchText(e.target.value);
+    setCurrentPage(1); // Reset to page 1 when searching
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
   return (
-    <section className="feed">
+    <section className="feed mb-10">
       <form className="relative w-full flex-center">
         <input
           type="text"
-          placeholder="Search for a tag or a username"
+          placeholder="Search for a tag"
           value={searchText}
           onChange={handleSearchChange}
           required
           className="search_input peer"
         />
       </form>
-      {posts.length > 0 ? (
-        <PostCardList data={posts} handleTagClick={() => {}} />
-      ) : (
+
+      {loading ? (
         <p>Loading posts...</p>
+      ) : (
+        <>
+          <PostCardList data={posts} handleTagClick={(tag) => setSearchText(tag)} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
+        </>
       )}
     </section>
+  );
+};
+
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  return (
+    <div className="pagination">
+      {pages.map((page) => (
+        <button
+          key={page}
+          onClick={() => onPageChange(page)}
+          className={`pagination_button ${page === currentPage ? 'active' : ''}`}
+        >
+          {page}
+        </button>
+      ))}
+    </div>
   );
 };
 

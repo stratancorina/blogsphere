@@ -52,8 +52,8 @@ const Nav = () => {
                 <span>Dashboard </span>
                 <Image
                   src={session?.user.image}
-                  width={30}
-                  height={30}
+                  width={28}
+                  height={28}
                   className="rounded-full"
                   alt="dashboard"
                 />
