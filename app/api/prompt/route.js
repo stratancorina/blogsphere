@@ -11,7 +11,7 @@ export const GET = async (request) => {
     const tag = searchParams.get('tag') || '';
 
     // Build query object
-    const query = tag ? { tag: { $regex: tag, $options: 'i' } } : {};
+    const query = tag ? { tag: { $regex: `^${tag}$`, $options: 'i' } } : {};
 
     // Get paginated results
     const prompts = await Prompt.find(query)
@@ -32,6 +32,7 @@ export const GET = async (request) => {
       { status: 200 }
     );
   } catch (error) {
+    console.error('Error fetching prompts:', error);
     return new Response('Failed to fetch prompts', { status: 500 });
   }
 };
