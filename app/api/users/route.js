@@ -7,6 +7,8 @@ export const GET = async () => {
 
     const users = await User.find({}, 'username email role image'); // Fetch specific fields only
 
+    console.log('Fetched Users:', users); 
+    
     return new Response(JSON.stringify(users), { status: 200 });
   } catch (error) {
     console.error('Error fetching users:', error);
