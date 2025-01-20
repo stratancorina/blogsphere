@@ -5,7 +5,7 @@ const Home = () => {
     <section className="w-full flex-center flex-col">
       <h1 className="head_text text-center">
       Hi and welcome to      
-        <span className="orange_gradient text-center"> BlogSphere</span>
+        <span className="blue_gradient text-center"> BlogSphere</span>
         <br className="max-md:hidden" />
       </h1>
       <p className="desc text-center">

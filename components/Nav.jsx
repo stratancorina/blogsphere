@@ -11,7 +11,6 @@ const Nav = () => {
   const { data: session } = useSession();
   const { role } = useAuth();
 
-
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -26,7 +25,7 @@ const Nav = () => {
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
-          src="/assets/images/ph-logo.png"
+          src="/assets/images/globe.png"
           alt="logo"
           width={40}
           height={40}
@@ -34,7 +33,6 @@ const Nav = () => {
         />
         <p className="logo_text">BlogSphere</p>
       </Link>
-
 
       {/* Desktop Navigation */}
       <div className="sm:flex hidden">
@@ -49,15 +47,25 @@ const Nav = () => {
               Sign Out
             </button>
 
-            <Link href="/profile">
+            {role === 'admin' ? (
+              <Link href="/dashboard">
+                <Image
+                  src={session?.user.image}
+                  width={37}
+                  height={37}
+                  className="rounded-full"
+                  alt="dashboard"
+                />
+              </Link>
+            ) : (
               <Image
-                src={session?.user.image}
-                width={37}
-                height={37}
-                className="rounded-full"
-                alt="profile"
-              />
-            </Link>
+                  src={session?.user.image}
+                  width={37}
+                  height={37}
+                  className="rounded-full"
+                  alt="dashboard"
+                />
+            )}
           </div>
         ) : (
           <>
@@ -87,19 +95,22 @@ const Nav = () => {
               width={37}
               height={37}
               className="rounded-full"
-              alt="profile"
+              alt="dashboard"
               onClick={() => setToggleDropdown(!toggleDropdown)}
             />
 
             {toggleDropdown && (
               <div className="dropdown">
-                <Link
-                  href="/profile"
-                  className="dropdown_link"
-                  onClick={() => setToggleDropdown(false)}
-                >
-                  My Profile
-                </Link>
+                {role === 'admin' && (
+                  <Link
+                    href="/dashboard"
+                    className="dropdown_link"
+                    onClick={() => setToggleDropdown(false)}
+                  >
+                    My Dashboard
+                  </Link>
+                )}
+
                 {role === 'admin' && (
                   <Link
                     href="/create-post"

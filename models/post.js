@@ -1,11 +1,11 @@
 import { Schema, model, models } from 'mongoose';
 
-const PromptSchema = new Schema({
+const PostSchema = new Schema({
   creator: {
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
-  prompt: {
+  post: {
     type: String,
     required: [true, 'Text is required.'],
   },
@@ -23,6 +23,6 @@ const PromptSchema = new Schema({
   },
 });
 
-const Prompt = models.Prompt || model('Prompt', PromptSchema);
+const Post = models.Post || model('Post', PostSchema);
 
-export default Prompt;
+export default Post;

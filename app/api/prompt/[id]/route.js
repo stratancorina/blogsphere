@@ -31,6 +31,7 @@ export const PATCH = async (request, { params }) => {
     existingPrompt.title = title;
     existingPrompt.prompt = prompt;
     existingPrompt.tag = tag;
+    existingPrompt.date = new Date();
 
     await existingPrompt.save();
 

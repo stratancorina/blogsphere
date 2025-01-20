@@ -7,7 +7,7 @@ import Form from '@components/Form';
 import { useAuth } from 'app/context/AuthContext';
 
 const UpdatePost = () => {
-    const { role } = useAuth();
+  const { role } = useAuth();
   
   const router = useRouter();
   const searchParams = useSearchParams();
